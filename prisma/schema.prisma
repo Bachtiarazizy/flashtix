@@ -33,3 +33,9 @@ model Ticket {
   price      Float 
   totalPrice Float
 }
+
+model Board {
+  id String @id @default(uuid())
+
+  title String
+}
