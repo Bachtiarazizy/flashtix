@@ -1,17 +1,12 @@
 "use server";
 
 import { auth } from "@clerk/nextjs";
-// import { revalidatePath } from "next/cache";
-
-// import { db } from "@/lib/db";
+import { InputType, ReturnType } from "./types";
 import { createSafeAction } from "@/lib/create-safe-action";
 
-import { InputType, ReturnType } from "./types";
 import { CreateBoard } from "./schema";
-// import { createAuditLog } from "@/lib/create-audit-log";
-// import { ACTION, ENTITY_TYPE } from "@prisma/client";
-// import { incrementAvailableCount, hasAvailableCount } from "@/lib/org-limit";
-// import { checkSubscription } from "@/lib/subscription";
+import { db } from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId } = auth();
@@ -22,12 +17,29 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  // Your logic here for the case where userId exists
+  const { title } = data;
 
-  // Assuming ReturnType is an object, you need to return something here
-  return {
-    // Your return object for the case where userId exists
-  };
+  let board;
+
+  try {
+    // Commenting out the error throw for testing
+    // throw new Error("balal");
+    board = await db.board.create({
+      data: {
+        title,
+      },
+    });
+  } catch (error) {
+    return {
+      error: "failed to create",
+    };
+  }
+
+  revalidatePath(`/board/${board.id}`);
+  return { data: board };
+
+  revalidatePath(`/board/${board.id}`);
+  return { data: board };
 };
 
 export const createBoard = createSafeAction(CreateBoard, handler);
