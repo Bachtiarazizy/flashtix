@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+
 import "./globals.css";
 
 const poppins = Poppins({
@@ -9,21 +11,19 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "FlashTix",
-  description: "FlashTix is a platform for event management.",
+  title: "Evently",
+  description: "Evently is a platform for event management.",
   icons: {
     icon: "/assets/images/logo.svg",
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={poppins.variable}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={poppins.variable}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
