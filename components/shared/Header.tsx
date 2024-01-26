@@ -1,50 +1,37 @@
-import { Button } from "@/components/ui/button";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import NavItems from "./NavItems";
+import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import NavItems from "./NavItems";
 import MobileNav from "./MobileNav";
 
 const Header = () => {
   return (
-    <div className="z-50 top-0 w-full h-16 px-6 border-b shadow-sm bg-white flex items-center justify-between py-6">
-      <div className="hidden md:flex">
-        <h2>Flashtix</h2>
-      </div>
-      <div className="flex md:gap-x-4 ">
-        <div className="md:flex-between hidden w-full max-w-xs">
-          <NavItems />
-          <div className="flex md:hidden ">
-            <MobileNav />
-          </div>
-        </div>
+    <header className="w-full border-b">
+      <div className="wrapper flex items-center justify-between">
+        <Link href="/" className="w-36">
+          <Image src="/assets/images/logo.svg" width={128} height={38} alt="Evently logo" />
+        </Link>
 
         <SignedIn>
-          {/* Menampilkan UserButton setelah pengguna masuk */}
-          <UserButton
-            afterSignOutUrl="/"
-            appearance={{
-              elements: {
-                avatarBox: {
-                  height: 30,
-                  width: 30,
-                },
-              },
-            }}
-          />
+          <nav className="md:flex-between hidden w-full max-w-xs">
+            <NavItems />
+          </nav>
         </SignedIn>
-        <SignedOut>
-          <div>
-            {/* Tombol login hanya muncul jika pengguna belum masuk */}
+
+        <div className="flex w-32 justify-end gap-3">
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+            <MobileNav />
+          </SignedIn>
+          <SignedOut>
             <Button asChild className="rounded-full" size="lg">
               <Link href="/sign-in">Login</Link>
             </Button>
-            <div className="flex md:hidden ">
-              <MobileNav />
-            </div>
-          </div>
-        </SignedOut>
+          </SignedOut>
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 

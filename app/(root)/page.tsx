@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-slate-50">
       <HeroSection />
       <EventlistCard />
       <ExplorePlaceCard />
@@ -42,6 +42,6 @@ export default function Home() {
         <MediaPartner />
       </section>
       <div className=" flex flex-col items-center text-white w-full h-80 text-center mt-16 bg-gradient-to-tr from-purple-800 via-blue-500 to-slate-500"></div>
-    </>
+    </div>
   );
 }

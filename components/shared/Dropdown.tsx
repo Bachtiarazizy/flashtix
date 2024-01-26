@@ -1,19 +1,25 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-export default function Dropdown() {
+interface DropdownComponentProps {
+  label: string;
+  items: string[];
+}
+
+const DropdownComponent: React.FC<DropdownComponentProps> = ({ label, items }) => {
   return (
-    <div className="border-4 border-gray-800 py-1 px-8 rounded-full">
+    <div className="flex py-4 px-6 hover:border">
       <DropdownMenu>
-        <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+        <DropdownMenuTrigger>{label}</DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel>{label}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>Subscription</DropdownMenuItem>
+          {items.map((item, index) => (
+            <DropdownMenuItem key={index}>{item}</DropdownMenuItem>
+          ))}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
   );
-}
+};
+
+export default DropdownComponent;

@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ComboboxDemo } from "./ComoBox";
-import CardImage from "./CardImage";
+import { imageCardData } from "@/constant";
+import CardImageComponent from "./CardImage";
 
 export default function EventlistCard() {
   return (
@@ -16,16 +17,13 @@ export default function EventlistCard() {
           <ComboboxDemo />
         </div>
       </div>
-      <div className="flex mt-12">
-        <div className="flex flex-wrap justify-between">
-          <CardImage />
-          <CardImage />
-          <CardImage />
-          <CardImage />
-          <CardImage />
-          <CardImage />
-        </div>
+
+      <div className="flex flex-wrap justify-between">
+        {imageCardData.map((data, index) => (
+          <CardImageComponent key={index} {...data} />
+        ))}
       </div>
+
       <Button size="lg" asChild className="button w-full sm:w-fit mt-12 flex mx-auto">
         <Link href="#events">Explore More</Link>
       </Button>
