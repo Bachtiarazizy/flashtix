@@ -7,7 +7,7 @@ interface DropdownComponentProps {
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({ label, items }) => {
   return (
-    <div className="flex py-4 px-6 hover:border">
+    <div className="flex py-4 px-6  hover:border">
       <DropdownMenu>
         <DropdownMenuTrigger>{label}</DropdownMenuTrigger>
         <DropdownMenuContent>

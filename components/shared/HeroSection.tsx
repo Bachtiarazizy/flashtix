@@ -11,11 +11,12 @@ import DropdownComponent from "@/components/shared/Dropdown";
 export default function HeroSection() {
   return (
     <>
-      <section className="flex flex-row w-full items-center top-0 bg-blue-600">
+      <section className="flex flex-col sm:flex-row items-center top-0 bg-blue-600 p-2 sm:p-6 md:p-2 lg:p-10 xl:p-2 ">
         {dropdownItems.map((dropdown, index) => (
           <DropdownComponent key={index} label={dropdown.label} items={dropdown.items} />
         ))}
       </section>
+
       <section className=" mx-16 mt-6">
         <div className="flex  flex-col relative ">
           <CarouselCard />

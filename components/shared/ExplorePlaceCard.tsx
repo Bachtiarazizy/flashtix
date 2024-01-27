@@ -6,11 +6,7 @@ export default function ExplorePlaceCard() {
       <div>
         <h2 className="text-2xl font-semibold mt-16">Explore Beautifull Place In</h2>
       </div>
-      <div className="flex flex-row mt-16 justify-around">
-        <CardImage />
-        <CardImage />
-        <CardImage />
-      </div>
+      <div className="flex flex-row mt-16 justify-around"></div>
     </section>
   );
 }

@@ -25,9 +25,13 @@ const Header = () => {
             <MobileNav />
           </SignedIn>
           <SignedOut>
+            <nav className="md:flex-between hidden  max-w-xs mr-10">
+              <NavItems />
+            </nav>
             <Button asChild className="rounded-full" size="lg">
               <Link href="/sign-in">Login</Link>
             </Button>
+            <MobileNav />
           </SignedOut>
         </div>
       </div>
