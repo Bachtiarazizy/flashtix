@@ -48,6 +48,8 @@ export type Promotion = {
   eventId: number;
 };
 
+// Assuming Organizer is another model in your Prisma schema
+// Assuming Organizer is another model in your Prisma schema
 export type CreateEventInput = {
   name: string;
   price: number;
@@ -57,8 +59,12 @@ export type CreateEventInput = {
   description: string;
   availableSeats: number;
   isFree: boolean;
-  ticketTypes?: string;
-  organizerId: number;
-  category?: string;
-  image?: string; // Add the image property
+  ticketTypes: string | null;
+  organizer: {
+    connect: {
+      id: number; // You need to provide the organizer's ID here
+    };
+  };
+  category: string | null;
+  image: string | null;
 };

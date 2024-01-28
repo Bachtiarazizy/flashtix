@@ -10,59 +10,116 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Define the User entity
-model User {
-  id               Int       @id @default(autoincrement())
-  name             String?
-  email            String    @unique
-  // Add other user-related fields as needed, such as password, address, etc.
-  events           Event[]   @relation("EventAttendees")
-  createdEvents    Event[]   @relation("EventOrganizer")
-  reviews          Review[]  // One-to-many relationship with reviews
-}
 
-// Define the Event entity
-// Define the Event entity
 model Event {
-  id               Int       @id @default(autoincrement())
-  name             String
-  price            Int
-  date             DateTime
-  time             String
-  location         String
-  description      String
-  availableSeats   Int
-  isFree           Boolean
-  ticketTypes      String?   // You may want to create a separate entity for ticket types if needed
-  organizer        User      @relation(name: "EventOrganizer", fields: [organizerId], references: [id])
-  organizerId      Int
-  attendees        User[]    @relation(name: "EventAttendees")
-  reviews          Review[]  // One-to-many relationship with reviews
-  promotions       Promotion[]
-  category         String?
-  image            String?   // Tambahkan properti category
+  id String @id @default(uuid())
+  userId String
+  title String @db.Text
+  description String? @db.Text
+  imageUrl String? @db.Text
+  price Float?
+  isPublished Boolean @default(false)
+
+  categoryId String?
+  category Category? @relation(fields: [categoryId], references: [id])
+
+  chapters Chapter[]
+  attachments Attachment[]
+  purchases Purchase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  
 }
 
-
-// Define the Review entity
-model Review {
-  id               Int       @id @default(autoincrement())
-  overallRating    Int
-  qualityRating    Int
-  suggestions      String?
-  event            Event     @relation(fields: [eventId], references: [id])
-  eventId          Int
-  reviewer         User      @relation(fields: [reviewerId], references: [id])
-  reviewerId       Int
+model Category {
+  id String @id @default(uuid())
+  name String @unique
+  event Event[]
 }
 
-// Define the Promotion entity
-model Promotion {
-  id               Int       @id @default(autoincrement())
-  discountAmount   Int
-  availableSlots   Int
-  referralCode     String
-  event            Event     @relation(fields: [eventId], references: [id])
-  eventId          Int
-  // Add other fields related to promotions as needed
+model Attachment {
+  id String @id @default(uuid())
+  name String
+  url String @db.Text
+
+  eventId String
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([eventId])
+}
+
+model Chapter {
+  id String @id @default(uuid())
+  title String
+  description String? @db.Text
+  videoUrl String? @db.Text
+  position Int
+  isPublished Boolean @default(false)
+  isFree Boolean @default(false)
+
+  muxData MuxData?
+
+  courseId String
+  event Event @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userProgress UserProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model MuxData {
+  id String @id @default(uuid())
+  assetId String
+  playbackId String?
+
+  chapterId String @unique
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model UserProgress {
+  id String @id @default(uuid())
+  userId String
+
+  chapterId String
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([chapterId])
+  @@unique([userId, chapterId])
+}
+
+model Purchase {
+  id String @id @default(uuid())
+  userId String
+
+  eventId String
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@unique([userId, eventId])
+  @@index([eventId])
+}
+
+model StripeCustomer {
+  id String @id @default(uuid())
+  userId String @unique
+  stripeCustomerId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

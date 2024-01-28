@@ -8,7 +8,7 @@ const YourPage: React.FC = () => {
     console.log("Form submitted with data:", formData);
   };
 
-  return <CreateEventForm onSubmit={handleSubmit} />;
+  return <CreateEventForm />;
 };
 
 export default YourPage;
