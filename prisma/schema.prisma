@@ -65,15 +65,15 @@ model Chapter {
 
   muxData MuxData?
 
-  courseId String
-  event Event @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  eventId String
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   userProgress UserProgress[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([courseId])
+  @@index([eventId])
 }
 
 model MuxData {

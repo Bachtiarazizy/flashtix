@@ -1,19 +1,19 @@
 import { db } from "@/lib/db";
 import { Event, Purchase } from "@prisma/client";
 
-type PurchaseWithCourse = Purchase & {
+type PurchaseWithEvent = Purchase & {
   event: Event;
 };
 
-const groupByCourse = (purchases: PurchaseWithCourse[]) => {
+const groupByEvent = (purchases: PurchaseWithEvent[]) => {
   const grouped: { [eventTitle: string]: number } = {};
 
   purchases.forEach((purchase) => {
-    const courseTitle = purchase.event.title;
-    if (!grouped[courseTitle]) {
-      grouped[courseTitle] = 0;
+    const eventTitle = purchase.event.title;
+    if (!grouped[eventTitle]) {
+      grouped[eventTitle] = 0;
     }
-    grouped[courseTitle] += purchase.event.price!;
+    grouped[eventTitle] += purchase.event.price!;
   });
 
   return grouped;
@@ -32,7 +32,7 @@ export const getAnalytics = async (userId: string) => {
       },
     });
 
-    const groupedEarnings = groupByCourse(purchases);
+    const groupedEarnings = groupByEvent(purchases);
     const data = Object.entries(groupedEarnings).map(([eventTitle, total]) => ({
       name: eventTitle,
       total: total,
