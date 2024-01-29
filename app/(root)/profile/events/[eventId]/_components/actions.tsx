@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
+import { useConfettiStore } from "@/app/hooks/use-confetti-store";
 
 interface ActionsProps {
   disabled: boolean;
@@ -16,7 +17,7 @@ interface ActionsProps {
 
 export const Actions = ({ disabled, eventId, isPublished }: ActionsProps) => {
   const router = useRouter();
-
+  const confetti = useConfettiStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
@@ -29,6 +30,7 @@ export const Actions = ({ disabled, eventId, isPublished }: ActionsProps) => {
       } else {
         await axios.patch(`/api/events/${eventId}/publish`);
         toast.success("Events published");
+        confetti.onOpen();
       }
 
       router.refresh();

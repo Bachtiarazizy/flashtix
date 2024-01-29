@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
 import { ToastProvider } from "@/components/providers/toaster-provider";
+import { ConfettiProvider } from "@/components/providers/confetti-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider>
       <html lang="en">
         <body className={poppins.variable}>
+          <ConfettiProvider />
           <ToastProvider />
           {children}
         </body>

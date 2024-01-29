@@ -1,6 +1,5 @@
 import { Category, Event } from "@prisma/client";
 
-import { getProgress } from "@/actions/get-progress";
 import { db } from "@/lib/db";
 
 type EeventWithProgressWithCategory = Event & {
@@ -9,13 +8,13 @@ type EeventWithProgressWithCategory = Event & {
   progress: number | null;
 };
 
-type GetEvent = {
+type getEvent = {
   userId: string;
   title?: string;
   categoryId?: string;
 };
 
-export const getEvent = async ({ userId, title, categoryId }: GetEvent): Promise<EeventWithProgressWithCategory[]> => {
+export const getEvent = async ({ userId, title, categoryId }: getEvent): Promise<EeventWithProgressWithCategory[]> => {
   try {
     const events = await db.event.findMany({
       where: {

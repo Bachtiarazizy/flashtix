@@ -10,7 +10,7 @@ import { Event } from "@prisma/client";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-// import { FileUpload } from "@/components/file-upload";
+import { FileUpload } from "@/components/file-upload";
 
 interface ImageFormProps {
   initialData: Event;
@@ -44,7 +44,7 @@ export const ImageForm = ({ initialData, eventId }: ImageFormProps) => {
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Event image
+        Course image
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing && <>Cancel</>}
           {!isEditing && !initialData.imageUrl && (
@@ -73,6 +73,14 @@ export const ImageForm = ({ initialData, eventId }: ImageFormProps) => {
         ))}
       {isEditing && (
         <div>
+          <FileUpload
+            endpoint="eventImage"
+            onChange={(url) => {
+              if (url) {
+                onSubmit({ imageUrl: url });
+              }
+            }}
+          />
           <div className="text-xs text-muted-foreground mt-4">16:9 aspect ratio recommended</div>
         </div>
       )}

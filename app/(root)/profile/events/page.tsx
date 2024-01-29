@@ -1,7 +1,32 @@
-import React from "react";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return <div>page</div>;
+import { db } from "@/lib/db";
+
+import { DataTable } from "./_components/data-table";
+import { columns } from "./_components/column";
+
+const EventsPage = async () => {
+  const { userId } = auth();
+
+  if (!userId) {
+    return redirect("/");
+  }
+
+  const events = await db.event.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return (
+    <div className="p-6">
+      <DataTable columns={columns} data={events} />
+    </div>
+  );
 };
 
-export default page;
+export default EventsPage;

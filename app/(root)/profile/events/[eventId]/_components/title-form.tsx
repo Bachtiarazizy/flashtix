@@ -76,7 +76,7 @@ export const TitleForm = ({ initialData, eventId }: TitleFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input disabled={isSubmitting} placeholder="e.g. 'Advanced web development'" {...field} />
+                    <Input disabled={isSubmitting} placeholder="e.g. 'music festival'" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

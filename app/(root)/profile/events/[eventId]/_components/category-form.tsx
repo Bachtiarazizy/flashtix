@@ -13,7 +13,6 @@ import { Event } from "@prisma/client";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Textarea } from "@/components/ui/textarea";
 import { Combobox } from "@/components/ui/comobox";
 
 interface CategoryFormProps {
@@ -45,7 +44,7 @@ export const CategoryForm = ({ initialData, eventId, options }: CategoryFormProp
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/events/${eventId}`, values);
-      toast.success("Event updated");
+      toast.success("Events updated");
       toggleEdit();
       router.refresh();
     } catch {
@@ -58,7 +57,7 @@ export const CategoryForm = ({ initialData, eventId, options }: CategoryFormProp
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Event category
+        Events category
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <>Cancel</>
@@ -79,7 +78,9 @@ export const CategoryForm = ({ initialData, eventId, options }: CategoryFormProp
               name="categoryId"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl></FormControl>
+                  <FormControl>
+                    <Combobox options={options} onChange={(value) => field.onChange(value)} value={field.value} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

@@ -34,7 +34,7 @@ export async function PATCH(req: Request, { params }: { params: { eventId: strin
 
     return NextResponse.json(unpublishedEvent);
   } catch (error) {
-    console.log("[COURSE_ID_UNPUBLISH]", error);
+    console.log("[event_ID_UNPUBLISH]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
