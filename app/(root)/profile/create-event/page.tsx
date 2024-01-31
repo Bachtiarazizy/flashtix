@@ -53,7 +53,7 @@ const CreatePage = () => {
                 <FormItem>
                   <FormLabel>Event title</FormLabel>
                   <FormControl>
-                    <Input disabled={isSubmitting} placeholder="e.g. 'Advanced web development'" {...field} />
+                    <Input disabled={isSubmitting} placeholder="e.g. 'Leadership training'" {...field} />
                   </FormControl>
                   <FormDescription>What is category of your event ?</FormDescription>
                   <FormMessage />

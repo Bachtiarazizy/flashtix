@@ -16,26 +16,19 @@ export async function DELETE(req: Request, { params }: { params: { eventId: stri
         id: params.eventId,
         userId: userId,
       },
-      include: {
-        chapters: {
-          include: {
-            muxData: true,
-          },
-        },
-      },
     });
 
     if (!event) {
       return new NextResponse("Not found", { status: 404 });
     }
 
-    const deletedEvent = await db.event.delete({
+    const deletedevent = await db.event.delete({
       where: {
         id: params.eventId,
       },
     });
 
-    return NextResponse.json(deletedEvent);
+    return NextResponse.json(deletedevent);
   } catch (error) {
     console.log("[event_ID_DELETE]", error);
     return new NextResponse("Internal Error", { status: 500 });

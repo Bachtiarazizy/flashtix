@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -23,7 +24,6 @@ model Event {
   categoryId String?
   category Category? @relation(fields: [categoryId], references: [id])
 
-
   attachments Attachment[]
   purchases Purchase[]
 
@@ -31,7 +31,7 @@ model Event {
   updatedAt DateTime @updatedAt
 
   @@index([categoryId])
-  
+  @@fulltext([title])
 }
 
 model Category {
@@ -53,9 +53,6 @@ model Attachment {
 
   @@index([eventId])
 }
-
-
-
 
 
 

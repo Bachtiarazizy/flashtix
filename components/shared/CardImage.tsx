@@ -19,14 +19,15 @@ const CardImageComponent: React.FC<CardImageComponentProps> = ({ title, date, ti
       </CardHeader>
       <CardContent className="absolute top-0 left-0 right-0 bottom-0">
         <div className="h-full flex items-end justify-end">
-          <img src={imageUrl} alt={title} className="w-full h-full object-cover" style={{ objectFit: "cover" }} />
+          <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
         </div>
         <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-          <CardTitle>{title}</CardTitle>
-          <CardFooter className="bg-white bg-opacity-75 p-4">
-            <p className="text-lg font-semibold mb-2">Price: {price}</p>
-            <p>Organizer: {organizer}</p>
-          </CardFooter>
+          <div className="text-white text-center">
+            <CardTitle>{title}</CardTitle>
+            <CardFooter className="bg-white bg-opacity-75 p-4">
+              <p className="text-lg font-semibold mb-2 text-black">Price: {price}</p>
+            </CardFooter>
+          </div>
         </div>
       </CardContent>
     </Card>

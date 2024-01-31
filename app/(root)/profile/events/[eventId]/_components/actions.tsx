@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { useConfettiStore } from "@/app/hooks/use-confetti-store";
+import { ConfirmModal } from "@/components/modals/confirm-modals";
 
 interface ActionsProps {
   disabled: boolean;
@@ -49,7 +50,7 @@ export const Actions = ({ disabled, eventId, isPublished }: ActionsProps) => {
 
       toast.success("Events deleted");
       router.refresh();
-      router.push(`/profile/events`);
+      router.push(`/profile/events/`);
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -62,6 +63,11 @@ export const Actions = ({ disabled, eventId, isPublished }: ActionsProps) => {
       <Button onClick={onClick} disabled={disabled || isLoading} variant="outline" size="sm">
         {isPublished ? "Unpublish" : "Publish"}
       </Button>
+      <ConfirmModal onConfirm={onDelete}>
+        <Button size="sm" disabled={isLoading}>
+          <Trash className="h-4 w-4" />
+        </Button>
+      </ConfirmModal>
     </div>
   );
 };

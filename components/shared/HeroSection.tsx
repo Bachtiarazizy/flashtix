@@ -1,6 +1,5 @@
 "use client";
 
-import Dropdown from "@/components/shared/Dropdown";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import CarouselCard from "./CarouselCard";
@@ -39,4 +38,3 @@ export default function HeroSection() {
     </>
   );
 }
-// style={{ backgroundImage: 'url("/assets/images/company.jpg")' }}

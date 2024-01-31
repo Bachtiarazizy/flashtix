@@ -3,8 +3,8 @@ import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
-import { ToastProvider } from "@/components/providers/toaster-provider";
-import { ConfettiProvider } from "@/components/providers/confetti-provider";
+import { ToastProvider } from "@/components/shared/providers/toaster-provider";
+import { ConfettiProvider } from "@/components/shared/providers/confetti-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Evently",
+  title: "Flashtix",
   description: "Evently is a platform for event management.",
   icons: {
     icon: "/assets/images/logo.svg",

@@ -5,47 +5,34 @@ export const headerLinks = [
   },
   {
     label: "My Event",
-    route: "/events",
+    route: "/profile/events",
   },
   {
     label: "My Profile",
-    route: "/profile",
+    route: "/profile/events",
   },
 ];
 
-export const eventDefaultValues = {
-  title: "",
-  description: "",
-  location: "",
-  imageUrl: "",
-  startDateTime: new Date(),
-  endDateTime: new Date(),
-  categoryId: "",
-  price: "",
-  isFree: false,
-  url: "",
-};
-
 export const dropdownItems = [
   {
+    label: "Corporate",
+    items: ["Conferences", "Seminars", "Workshop", "Exhibition", "Trade Show"],
+  },
+  {
     label: "Sports",
-    items: ["Edit Profile", "Change Password", "Logout"],
+    items: ["Football", "BasketBall", "Tennis", "Badminton", "Volly", "Boxing"],
   },
   {
-    label: "Comedy",
-    items: ["General Settings", "Notification Settings"],
-  },
-  {
-    label: "Music",
-    items: ["General Settings", "Notification Settings"],
+    label: "Social & Charity",
+    items: ["Charity", "Volunteer"],
   },
   {
     label: "Gallery & festival",
-    items: ["General Settings", "Notification Settings"],
+    items: ["Art Gallery", "Fashion", "Festival"],
   },
   {
-    label: "Top cities",
-    items: ["General Settings", "Notification Settings"],
+    label: "Music",
+    items: ["Rock", "Pop", "Jazz", "Electronic"],
   },
 ];
 export const imageCardData = [

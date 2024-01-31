@@ -10,24 +10,24 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 const frameworks = [
   {
-    value: "next.js",
-    label: "Next.js",
+    value: "Music",
+    label: "Music",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
+    value: "Festival",
+    label: "Festival",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
+    value: "Gallery",
+    label: "Gallery",
   },
   {
-    value: "remix",
-    label: "Remix",
+    value: "Sport",
+    label: "Sport",
   },
   {
-    value: "astro",
-    label: "Astro",
+    value: "Comedy",
+    label: "Comedy",
   },
 ];
 
@@ -39,14 +39,14 @@ export function ComboboxDemo() {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between">
-          {value ? frameworks.find((framework) => framework.value === value)?.label : "Select framework..."}
+          {value ? frameworks.find((framework) => framework.value === value)?.label : "Select category..."}
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." className="h-9" />
-          <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandInput placeholder="Search category..." className="h-9" />
+          <CommandEmpty>No category found.</CommandEmpty>
           <CommandGroup>
             {frameworks.map((framework) => (
               <CommandItem
