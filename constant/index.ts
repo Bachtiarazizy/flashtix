@@ -13,25 +13,15 @@ export const headerLinks = [
   },
 ];
 
-export const dropdownItems = [
-  {
-    label: "Corporate",
-    items: ["Conferences", "Seminars", "Workshop", "Exhibition", "Trade Show"],
-  },
-  {
-    label: "Sports",
-    items: ["Football", "BasketBall", "Tennis", "Badminton", "Volly", "Boxing"],
-  },
-  {
-    label: "Social & Charity",
-    items: ["Charity", "Volunteer"],
-  },
-  {
-    label: "Gallery & festival",
-    items: ["Art Gallery", "Fashion", "Festival"],
-  },
-  {
-    label: "Music",
-    items: ["Rock", "Pop", "Jazz", "Electronic"],
-  },
-];
+export const eventDefaultValues = {
+  title: "",
+  description: "",
+  location: "",
+  imageUrl: "",
+  startDateTime: new Date(),
+  endDateTime: new Date(),
+  categoryId: "",
+  price: "",
+  isFree: false,
+  url: "",
+};
