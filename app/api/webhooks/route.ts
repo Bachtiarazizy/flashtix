@@ -58,9 +58,9 @@ export async function POST(req: Request) {
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
-      username: username!,
-      firstName: first_name,
-      lastName: last_name,
+      username: username || "", // Ensure username is not null
+      firstName: first_name || "", // Provide default value if null
+      lastName: last_name || "", // Provide default value if null
       photo: image_url,
     };
 
@@ -81,9 +81,9 @@ export async function POST(req: Request) {
     const { id, image_url, first_name, last_name, username } = evt.data;
 
     const user = {
-      firstName: first_name,
-      lastName: last_name,
-      username: username!,
+      firstName: first_name || "", // Provide default value if null
+      lastName: last_name || "", // Provide default value if null
+      username: username || "", // Ensure username is not null
       photo: image_url,
     };
 
